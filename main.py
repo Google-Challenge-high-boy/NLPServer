@@ -79,7 +79,7 @@ def get_similarities() -> Dict[str, int]:
     #     result["relativeItems"][word] = similarity
     for word in nearest_words:
         #print(word)
-        print(nearest_words[word][0])
+        #print(nearest_words[word][0])
         result["relativeItems"][word] = round(nearest_words[word][1]*100,3)
     return JSONResponse(content=result)
 

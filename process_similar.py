@@ -43,7 +43,7 @@ def dump_nearest(puzzle_num: int, word: str, words: List[str], mat: array, k: in
     closeness = dict()
     for idx, (w, d) in enumerate(result):
         closeness[w] = (idx, d)
-    closeness[word] = ("정답!", 1)
+    closeness[word] = ("Answer", 1)
     with open(f'data/near/{puzzle_num}.dat', 'wb') as f:
         pickle.dump(closeness, f)
     return closeness
@@ -51,7 +51,7 @@ def dump_nearest(puzzle_num: int, word: str, words: List[str], mat: array, k: in
 
 
 def get_nearest(puzzle_num: int, word: str, words: List[str], mat: array) -> Dict[str, Tuple[str, float]]:
-    print(f"getting nearest words for {puzzle_num}")
+    #print(f"getting nearest words for {puzzle_num}")
     try:
         with open(f'data/near/{puzzle_num}.dat', 'rb') as f:
             return pickle.load(f)
