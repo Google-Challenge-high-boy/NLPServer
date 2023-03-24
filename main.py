@@ -42,6 +42,7 @@ for offset in range(-2, 2):
 @scheduler.scheduled_job(trigger=CronTrigger(hour=1, minute=0, timezone=KST))
 def update_nearest():
     print("scheduled stuff triggered!")
+    print("current server time =", datetime.now().strftime("%H:%M:%S"))
     next_puzzle = ((utc.localize(datetime.utcnow()).astimezone(KST).date() - FIRST_DAY).days + 1) % NUM_SECRETS
     next_word = secrets[next_puzzle]
     to_delete = (next_puzzle - 4) % NUM_SECRETS
@@ -60,6 +61,7 @@ def main():
 @app.get("/api/komantle")
 def get_similarities() -> Dict[str, int]:
     current_puzzle = (utc.localize(datetime.utcnow()).astimezone(KST).date() - FIRST_DAY).days % NUM_SECRETS
+    print("current server time =", datetime.now().strftime("%H:%M:%S"))
     secret_word = app.secrets.get(current_puzzle)
     if secret_word is None:
         raise HTTPException(status_code=404, detail="Secret word not found")
