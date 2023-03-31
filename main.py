@@ -42,7 +42,7 @@ for offset in range(-2, 2):
 @scheduler.scheduled_job(trigger=CronTrigger(hour=0, minute=0, timezone=KST))
 def update_nearest():
     print("scheduled stuff triggered!")
-    print("current server time =", utc.localize(datetime.utcnow()).astimezone(KST).date())
+    print("current server time =",datetime.utcnow().astimezone(KST).strftime("%H:%M:%S"))
     next_puzzle = ((utc.localize(datetime.utcnow()).astimezone(KST).date() - FIRST_DAY).days + 1) % NUM_SECRETS
     next_word = secrets[next_puzzle]
     to_delete = (next_puzzle - 4) % NUM_SECRETS
